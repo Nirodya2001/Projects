@@ -1,0 +1,36 @@
+-- Rooms Table
+CREATE TABLE Rooms (
+    RoomID INT AUTO_INCREMENT PRIMARY KEY,
+    RoomNumber VARCHAR(10) NOT NULL,
+    RoomType VARCHAR(50) NOT NULL,
+    PricePerNight DECIMAL(10, 2) NOT NULL
+);
+
+-- Guests Table
+CREATE TABLE Guests (
+    GuestID INT AUTO_INCREMENT PRIMARY KEY,
+    GuestName VARCHAR(100) NOT NULL,
+    ContactInfo VARCHAR(100),
+    Email VARCHAR(100) NOT NULL
+);
+
+-- Bookings Table
+CREATE TABLE Bookings (
+    BookingID INT AUTO_INCREMENT PRIMARY KEY,
+    GuestID INT,
+    RoomID INT,
+    CheckInDate DATE,
+    CheckOutDate DATE,
+    FOREIGN KEY (GuestID) REFERENCES Guests(GuestID),
+    FOREIGN KEY (RoomID) REFERENCES Rooms(RoomID)
+);
+
+-- Users Table
+CREATE TABLE Users (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Username VARCHAR(50) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL -- Password will be hashed for security
+);
+
+INSERT INTO Users (Username, Password) VALUES ('admin', '$2y$10$xlXkiAU65QLW5FiwSu9U8uP7sqN8ba7YwQ7N6zVBMGMZCdiPo9c76');
+
